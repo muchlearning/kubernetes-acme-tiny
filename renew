@@ -3,7 +3,7 @@
 set +e
 
 # only renew if certificate will expire within 20 days (=1728000 seconds)
-openssl x509 -checkend 1728000 -in /etc/acme-tiny/certs/$1 && exit 255
+openssl x509 -checkend 1728000 -in /etc/acme-tiny/certs/$1 && exit
 
 set -e
 
