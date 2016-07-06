@@ -13,13 +13,11 @@ with open('/var/lib/acme-tiny/certs/%s/cert.pem' % CERTIFICATE) as f:
 with open('/var/lib/acme-tiny/certs/%s/chain.pem' % CERTIFICATE) as f:
     chain = f.read()
 
-patch = json.dumps([{"op": "add",
-                     "path": "/%s" % CERTIFICATE,
-                     "value": "\n".join([cert, chain])}])
+patch = json.dumps({"data": {CERTIFICATE: "\n".join([cert, chain])}})
 
 req = requests.patch(url=K8SBASE + "/api/v1/namespaces/lb/configmaps/certificates",
                      data=patch,
-                     headers={"Content-Type": "application/json-patch+json"})
+                     headers={"Content-Type": "application/merge-patch+json"})
 
 if req.status_code < 200 or req.status_code >= 300:
     print "Error saving certificate %s to configmap" % CERTIFICATE
