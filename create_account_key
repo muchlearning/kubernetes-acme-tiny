@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+mkdir -p /tmp/acme-tiny
+chmod 700 /tmp/acme-tiny
+openssl genrsa $1 > /tmp/acme-tiny/account.key
+chmod 600 /tmp/acme-tiny/account.key
+echo "Created private account key in /tmp/acme-tiny/account.key."
+echo "Please make sure that it is accessible as /etc/acme-tiny/secrets/account.key and then remove it."

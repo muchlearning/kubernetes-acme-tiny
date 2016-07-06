@@ -14,6 +14,6 @@ WORKDIR /opt/acme-tiny-utils
 
 COPY acme-tiny /opt/acme-tiny
 COPY cert-chain-resolver-py /opt/cert-chain-resolver-py
-COPY renew put-certificate.py /opt/acme-tiny-utils/
+COPY renew create_account_key create_domain_key put-certificate.py /opt/acme-tiny-utils/
 
 CMD ["/usr/sbin/thttpd", "-nov", "-D", "-d", "/var/lib/acme-tiny/challenge", "-l", "/dev/stdout"]

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+mkdir -p /tmp/acme-tiny
+chmod 700 /tmp/acme-tiny
+openssl genrsa $1 > /tmp/acme-tiny/privkey.pem
+chmod 600 /tmp/acme-tiny/privkey.pem
+echo "Created private key for domain in /tmp/acme-tiny/privkey.pem."
+echo "Please add it to the lb/keys secret and then delete it."
