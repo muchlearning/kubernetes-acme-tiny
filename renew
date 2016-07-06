@@ -8,7 +8,7 @@ openssl x509 -checkend 1728000 -in /etc/acme-tiny/certs/$1 && exit 255
 set -e
 
 mkdir -p /var/lib/acme-tiny/certs/$1
-su nobody -s /bin/sh -c "python /opt/acme-tiny/acme_tiny.py --account-key /etc/acme-tiny/secrets/account.key --csr /etc/acme-tiny/csrs/$1.csr --acme-dir /var/lib/acme-tiny/challenge/.well-known/acme-challenge/" > /var/lib/acme-tiny/certs/$1/cert.pem
+python /opt/acme-tiny/acme_tiny.py --account-key /etc/acme-tiny/secrets/account.key --csr /etc/acme-tiny/csrs/$1.csr --acme-dir /var/lib/acme-tiny/challenge/.well-known/acme-challenge/ > /var/lib/acme-tiny/certs/$1/cert.pem
 cert-chain-resolver.py -o /var/lib/acme-tiny/certs/$1/chain.pem -i /var/lib/acme-tiny/certs/$1/cert.pem -n 1
 python /opt/acme-tiny-utils/put-certificate.py $1
 echo "Renewed certificate"
