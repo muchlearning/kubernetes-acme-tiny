@@ -5,7 +5,7 @@ MAINTAINER Hubert Chathi <hubert@muchlearning.org>
 EXPOSE 80
 ENV K8SBASE="http://127.0.0.1:8000"
 
-RUN apk add --update --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ thttpd python py-openssl py-pip openssl \
+RUN apk add --update --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ thttpd python py-openssl py-pip openssl ca-certificates \
     && rm -rf /var/cache/apk/* \
     && mkdir -p /var/lib/acme-tiny/challenge/.well-known/acme-challenge \
     && pip install requests
