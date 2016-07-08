@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ -z "$1" ]; then
+    echo "Please provide a key length as argument"
+    exit 1
+fi
+
 set -e
 
 mkdir -p /tmp/acme-tiny
