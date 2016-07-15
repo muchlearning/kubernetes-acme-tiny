@@ -2,8 +2,17 @@
 
 set +e
 
-# only renew if certificate will expire within 20 days (=1728000 seconds)
-openssl x509 -checkend 1728000 -in /etc/acme-tiny/certs/$1 && exit
+if [ "$1" = "--force" -o "$1" = "-f" ]; then
+    shift
+else
+    # only renew if certificate will expire within 20 days (=1728000 seconds)
+    openssl x509 -checkend 1728000 -in /etc/acme-tiny/certs/$1 && exit
+fi
+
+if [ -z "$1" ]; then
+    echo "Please provide the certificate name as argument"
+    exit 1
+fi
 
 set -e
 
